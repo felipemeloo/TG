@@ -1,7 +1,10 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Ordenacao{
@@ -9,7 +12,7 @@ public class Ordenacao{
 	Collections.sort(unsortedList);
 	return unsortedList;
 	}
-	public ArrayList<Integer> listaDeVertices(ArrayList<Integer> unsortedList){
+	/*public ArrayList<Integer> listaDeVertices(ArrayList<Integer> unsortedList){
 		 ArrayList<Integer> retorno= new ArrayList<Integer>(unsortedList);
 		 retorno.remove(0);
 		Collections.sort(retorno);
@@ -30,7 +33,18 @@ public class Ordenacao{
 			  i++;
 	  }
 	return retorno;
-	}
+	}*/
+	
+	public ArrayList<Integer> listaDeVertices(ArrayList<Integer> unsortedList){
+	ArrayList<Integer> retorno= new ArrayList<Integer>(unsortedList);
+	retorno.remove(0);
+	Collections.sort(retorno);
+	Integer[] lista =new Integer[retorno.size()];
+	retorno.toArray(lista);
+	List<Integer> distinctList = Arrays.asList(lista).stream().distinct().collect(Collectors.toList());
+	return (ArrayList<Integer>)distinctList;}
+	
+	
 	public static boolean estaOrdenado(ArrayList<Integer> sortedList)
 	{
 		boolean sorted = true;

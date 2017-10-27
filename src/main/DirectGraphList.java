@@ -46,11 +46,9 @@ public class DirectGraphList {
 		}
 		for (int i = 0; i < lista.size(); i++) {
 			for (int j = 0; j < lista.size(); j++) {
-				Vertice v = new Vertice(String.valueOf(i));
-				Vertice adj = new Vertice(String.valueOf(j));
 				matriz = geraMatriz(numeros);
 				if (matriz[i][j] == 1) {
-					v.addAdjacent(adj);
+					vert.get(i).addAdjacent(vert.get(j));
 				}
 			}
 		}
@@ -194,12 +192,10 @@ public class DirectGraphList {
 	}
 
 	public static void saidaArquivo() {
-		// ArrayList<Integer> ordenados= hp.heapSort(numeros);
 		File arquivo = new File("C:/TXT/saida.txt");
 		try (PrintWriter pw = new PrintWriter(arquivo)) {
 			pw.println("# n =" + numeros.get(0));
 			pw.println("# m =" + ((numeros.size() - 1) / 2));
-			// double d_medio = 2* numeros.get(0)/ numeros.size()-1/2;
 			for (int i = 0; i < numeros.size(); i++) {
 				if (i % 2 != 0) {
 					pw.print(i);
@@ -325,6 +321,7 @@ public class DirectGraphList {
 		// geraMatriz(numeros);]
 		Ordenacao ord = new Ordenacao();
 		gp.criaListaVertice(ord.listaDeVertices(numeros));
+		gp.showInfo();
 		/*
 		 * hp.heapSort(numeros); for(int j=0;j<numeros.size();j++){
 		 * g.addVertice(Integer.toString(numeros.get(j),6)); } for(int
