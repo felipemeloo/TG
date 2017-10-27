@@ -8,13 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class DirectGraphList {
-	private static Ordenacao hp;
-	private ArrayList<Vertice> vert;
-	static ArrayList<Integer> numeros = new ArrayList<Integer>();
-	private static DirectGraphList gp;
+public class Grafo {
+	public static ArrayList<Vertice> vert;
+	public static ArrayList<Integer> arquivo = new ArrayList<Integer>();
+	public Grafo gp;
 
-	public DirectGraphList() {
+	public Grafo() {
 		vert = new ArrayList<Vertice>();
 	}
 
@@ -46,7 +45,7 @@ public class DirectGraphList {
 		}
 		for (int i = 0; i < lista.size(); i++) {
 			for (int j = 0; j < lista.size(); j++) {
-				matriz = geraMatriz(numeros);
+				matriz = geraMatriz(arquivo);
 				if (matriz[i][j] == 1) {
 					vert.get(i).addAdjacent(vert.get(j));
 				}
@@ -157,7 +156,7 @@ public class DirectGraphList {
 		System.out.println("\n    }");
 	}
 
-	public static void criaArray(ArrayList<Integer> a, String nome) throws FileNotFoundException {
+	public static void criaArray(String nome) throws FileNotFoundException {
 		int tamanhoIn = 0;
 		int tamanhoAt = 0;
 		int cont = 1;
@@ -173,7 +172,7 @@ public class DirectGraphList {
 					if (!str.substring(tamanhoAt, cont).equalsIgnoreCase(" ")) {
 						parcial = str.substring(tamanhoAt, cont);
 						parsedStr = Integer.parseInt(parcial);
-						a.add(parsedStr);
+						arquivo.add(parsedStr);
 					}
 					tamanhoAt++;
 					cont = tamanhoAt + 1;
@@ -192,11 +191,11 @@ public class DirectGraphList {
 	}
 
 	public static void saidaArquivo() {
-		File arquivo = new File("C:/TXT/saida.txt");
-		try (PrintWriter pw = new PrintWriter(arquivo)) {
-			pw.println("# n =" + numeros.get(0));
-			pw.println("# m =" + ((numeros.size() - 1) / 2));
-			for (int i = 0; i < numeros.size(); i++) {
+		File arq = new File("C:/TXT/saida.txt");
+		try (PrintWriter pw = new PrintWriter(arq)) {
+			pw.println("# n =" + arquivo.get(0));
+			pw.println("# m =" + ((arquivo.size() - 1) / 2));
+			for (int i = 0; i < arquivo.size(); i++) {
 				if (i % 2 != 0) {
 					pw.print(i);
 					pw.println(" " + getGrauVertice(i));
@@ -209,11 +208,11 @@ public class DirectGraphList {
 
 	public static int getGrauVertice(Integer vertice) {
 		int grau = 0;
-		for (Integer s : numeros) {
+		for (Integer s : arquivo) {
 			if (s == vertice)
 				grau++;
 		}
-		if (vertice == numeros.get(0)) {
+		if (vertice == arquivo.get(0)) {
 			grau--;
 		}
 		return grau;
@@ -240,7 +239,7 @@ public class DirectGraphList {
 			return false;
 	}
 
-	public static boolean possibilidades(DirectGraphList graph, String a, ArrayList<Integer> array) {
+	public static boolean possibilidades(Grafo graph, String a, ArrayList<Integer> array) {
 		int diferentes = 0;
 		for (int i = 0; i < array.size(); i++) {
 			String numero = Integer.toString(array.get(i), 6);
@@ -310,38 +309,4 @@ public class DirectGraphList {
 		return matriz;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
-		initOrdenacao();
-		initGraph();
-		criaArray(numeros, "C:/TXT/input.txt");
-		/*
-		 * saidaArquivo(); DirectGraphList g = new DirectGraphList();
-		 * System.out.println(getGrauVertice(5));
-		 */
-		// geraMatriz(numeros);]
-		Ordenacao ord = new Ordenacao();
-		gp.criaListaVertice(ord.listaDeVertices(numeros));
-		gp.showInfo();
-		/*
-		 * hp.heapSort(numeros); for(int j=0;j<numeros.size();j++){
-		 * g.addVertice(Integer.toString(numeros.get(j),6)); } for(int
-		 * i=0;i<numeros.size();i++){ String numer=Integer.toString(numeros.get(i), 6);
-		 * possibilidades(g,numer,numeros); } g.atribuiTamanhoSequencia(); Vertice
-		 * inicial=g.getVerticeInicial(); g.printaSequencia(inicial);
-		 */
-	}
-
-	public static void initOrdenacao() {
-		if (hp == null) {
-			hp = new Ordenacao();
-
-		}
-	}
-
-	public static void initGraph() {
-		if (gp == null) {
-			gp = new DirectGraphList();
-
-		}
-	}
 }

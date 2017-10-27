@@ -35,15 +35,15 @@ public class Ordenacao{
 	return retorno;
 	}*/
 	
-	public ArrayList<Integer> listaDeVertices(ArrayList<Integer> unsortedList){
-	ArrayList<Integer> retorno= new ArrayList<Integer>(unsortedList);
-	retorno.remove(0);
-	Collections.sort(retorno);
-	Integer[] lista =new Integer[retorno.size()];
-	retorno.toArray(lista);
-	List<Integer> distinctList = Arrays.asList(lista).stream().distinct().collect(Collectors.toList());
-	return (ArrayList<Integer>)distinctList;}
-	
+	public ArrayList<Integer> listaDeVertices(ArrayList<Integer> unsortedList) {
+		ArrayList<Integer> retorno = new ArrayList<Integer>(unsortedList);
+		retorno.remove(0);
+		Collections.sort(retorno);
+		Integer[] lista = new Integer[retorno.size()];
+		retorno.toArray(lista);
+		List<Integer> distinctList = Arrays.asList(lista).stream().distinct().collect(Collectors.toList());
+		return (ArrayList<Integer>) distinctList;
+	}
 	
 	public static boolean estaOrdenado(ArrayList<Integer> sortedList)
 	{
