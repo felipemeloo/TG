@@ -3,13 +3,11 @@ package main;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import buscas.BuscaEmLargura;
 
 public class Teste {
 	private static Ordenacao hp;
 	public static Grafo gp;
 	private static Vertice ve;
-	private static BuscaEmLargura bl;
 	public static void main(String[] args) throws FileNotFoundException {
 		initOrdenacao();
 		initGraph();
@@ -53,10 +51,10 @@ public class Teste {
 
 		}
 	}
-	public static void initBuscaEmLargura() {
+/*	public static void initBuscaEmLargura() {
 		if (bl == null) {
 			bl = new BuscaEmLargura();
 			
 		}
-	}
+	}*/
 }
