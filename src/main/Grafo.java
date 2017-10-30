@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Scanner;
 
 public class Grafo {
 	public static ArrayList<Vertice> vert;
@@ -291,6 +293,16 @@ public class Grafo {
 			}
 		}
 		return aux;
+	}
+	
+	public static Integer recebeVertice() {
+		Scanner ler = new Scanner(System.in);
+		System.out.println("Digite a vértice a ser iniciada a busca:");
+		return ler.nextInt();
+	}
+	
+	public void percorrendoAdjacente(Grafo grafo, Queue<Vertice> verticeComeco) {
+		
 	}
 
 	public static int[][] geraMatriz(ArrayList<Integer> a) {
