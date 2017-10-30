@@ -24,8 +24,8 @@ public class Teste {
 		Ordenacao ord = new Ordenacao();
 		//ve = new Vertice(Grafo.vert.get(0).getItem());
 		gp.geraMatriz(Grafo.arquivo);
-		gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
-		gp.showInfo();
+		//gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
+		//gp.showInfo();
 		//System.out.println(Grafo.vert.get(0).getDegree());
 		
 //		bl.percorrerAdjacente()
