@@ -14,7 +14,7 @@ public class Grafo {
 	public static ArrayList<Vertice> vert;
 	public static ArrayList<Integer> arquivo = new ArrayList<Integer>();
 	public Grafo gp;
-	public static int matriz[][];
+	public static boolean[][] matriz;
 
 	public Grafo() {
 		vert = new ArrayList<Vertice>();
@@ -48,10 +48,10 @@ public class Grafo {
 		for (int i = 0; i < lista.size(); i++) {
 			for (int j = 0; j < lista.size(); j++) {
 				if (matriz == null) {
-					matriz = new int[lista.get(0)][lista.get(0)];
+					matriz = new boolean[lista.get(0)][lista.get(0)];
 					matriz = geraMatriz(arquivo);
 				}
-				if (matriz[i][j] == 1) {
+				if (matriz[i][j]) {
 					vert.get(i).addAdjacent(vert.get(j));
 				}
 			}
@@ -305,18 +305,18 @@ public class Grafo {
 		
 	}
 
-	public static int[][] geraMatriz(ArrayList<Integer> a) {
+	public static boolean[][] geraMatriz(ArrayList<Integer> a) {
 		if (matriz == null) {
-			matriz = new int[a.get(0)][a.get(0)];
+			matriz = new boolean[a.get(0)][a.get(0)];
 			// int j = 2;
 			for (int i = 1; i < a.size(); i += 2) {
-				matriz[a.get(i + 1) - 1][a.get(i) - 1] = 1;
-				matriz[a.get(i) - 1][a.get(i + 1) - 1] = 1;
+				matriz[a.get(i + 1) - 1][a.get(i) - 1] = true;
+				matriz[a.get(i) - 1][a.get(i + 1) - 1] = true;
 			}
 			for (int i = 1; i < a.get(0); i++) {
 				for (int j = 1; j < a.get(0); j++) {
-					if (matriz[i][j] != 1) {
-						matriz[i][j] = 0;
+					if (!matriz[i][j]) {
+						matriz[i][j] = false;
 					}
 				}
 			}
@@ -324,7 +324,7 @@ public class Grafo {
 			try (PrintWriter pw = new PrintWriter(arq)) {
 				for (int i = 0; i < a.get(0); i++) {
 					for (int j = 0; j < a.get(0); j++) {
-						pw.print(matriz[i][j]);
+						pw.print(matriz[i][j]+" ");
 
 					}
 					pw.println();
