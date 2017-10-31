@@ -11,7 +11,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class Grafo {
-	public static ArrayList<Vertice> vert;
+	public ArrayList<Vertice> vert;
 	public static ArrayList<Integer> arquivo = new ArrayList<Integer>();
 	public Grafo gp;
 	public static boolean[][] matriz;
@@ -201,7 +201,7 @@ public class Grafo {
 	}
 
 	public static void saidaArquivo() {
-		File arq = new File("C:/TXT/saida.txt");
+		File arq = new File("/home/felipe/Documentos/output.txt");
 		try (PrintWriter pw = new PrintWriter(arq)) {
 			pw.println("# n =" + arquivo.get(0));
 			pw.println("# m =" + ((arquivo.size() - 1) / 2));
@@ -301,7 +301,23 @@ public class Grafo {
 		return ler.nextInt();
 	}
 	
-	public void percorrendoAdjacente(Grafo grafo, Queue<Vertice> verticeComeco) {
+	public void percorrendoAdjacente(Grafo grafo, Queue<Vertice> filaFilhos) {
+		boolean[] verticeVisitado = new boolean[grafo.vert.size()];
+		boolean nivelArvore;
+		int nivelRaiz = 1;
+		int[] nivelVertice = new int[grafo.vert.size()];
+		while(!filaFilhos.isEmpty()) {
+			nivelArvore = true;
+			Vertice v = filaFilhos.poll();
+			if(nivelRaiz == 1) {
+				verticeVisitado[grafo.vert.indexOf(v)]=true;
+			}
+			for(Vertice vt: v.getAdjacents()) {
+				
+				
+			}
+		}
+		
 		
 	}
 

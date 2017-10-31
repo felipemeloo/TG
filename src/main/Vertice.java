@@ -9,12 +9,14 @@ public class Vertice
     int maiorSequencia;
     public Vertice proximo;
     public ArrayList<Vertice> lst = new ArrayList<Vertice>();
+    public ArrayList<Aresta> listaAresta = new ArrayList<Aresta>();
 
     public Vertice(String item) {
         this.item = item;
         Visitado=false;
         maiorSequencia=0;
-        lst=new ArrayList<Vertice>();
+        lst = new ArrayList<Vertice>();
+        listaAresta = new ArrayList<Aresta>();
         proximo=null;
     }
     public String getItem() {
@@ -38,6 +40,10 @@ public class Vertice
     }
     public int getDegree(){
         return lst.size(); 
+    }
+    
+    public ArrayList<Aresta> getAdj() {
+    	return listaAresta;
     }
     
     
