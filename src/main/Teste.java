@@ -15,7 +15,7 @@ public class Teste {
 		Scanner ler = new Scanner(System.in);
 	    String nome = ler.nextLine(); // 3.5 entrada de dados (lendo uma String)
 //		as_graph
-		Grafo.criaArray("/home/felipe/Documentos/"+nome);
+		Grafo.criaArray(nome);
 		/*
 		 * saidaArquivo(); DirectGraphList g = new DirectGraphList();
 		 * System.out.println(getGrauVertice(5));
@@ -23,7 +23,7 @@ public class Teste {
 		// geraMatriz(numeros);]
 		Ordenacao ord = new Ordenacao();
 		//ve = new Vertice(Grafo.vert.get(0).getItem());
-	    //gp.geraMatriz(Grafo.arquivo);
+	    gp.geraMatriz(Grafo.arquivo);
 		//gp.showInfo();
 		//gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
 		//gp.showInfo();
