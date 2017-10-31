@@ -166,8 +166,8 @@ public class Grafo {
 		int tamanhoAt = 0;
 		String parcial = "";
 		int cont = 1;
+		FileReader ler = lerArquivo(nome);
 		try {
-			FileReader ler = new FileReader(nome);
 			BufferedReader arq = new BufferedReader(ler);
 			int parsedStr = 0;
 			String str = arq.readLine();
@@ -194,10 +194,30 @@ public class Grafo {
 					tamanhoIn = str.length();
 				} else
 					break;
+			}	
+			} catch (IOException e) {
+				System.out.println("Erro na abertura do arquivo: " + e.getMessage());
 			}
-		} catch (IOException e) {
-			System.out.println("Erro na abertura do arquivo: " + e.getMessage());
-		}
+		
+	}
+	
+	public static FileReader lerArquivo(String nome){
+		String windows ="C:/TXT/";
+		String linux ="Home/TXT/";
+		FileReader ler = null;
+		try {
+			 ler = new FileReader(linux+nome);
+			} catch (FileNotFoundException e) {
+				try {
+					ler = new FileReader(windows+nome);
+				} catch (FileNotFoundException e1) {
+					System.err.println("Arquivo nao encontrado para os diretorios informados!!!");
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		
+		return ler;
 	}
 
 	public static void saidaArquivo() {
@@ -351,5 +371,7 @@ public class Grafo {
 		}
 	return matriz;
 }
+
+	BufferedReader arq;
 
 }
