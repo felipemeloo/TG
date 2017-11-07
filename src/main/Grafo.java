@@ -355,20 +355,20 @@ public class Grafo {
 //					}
 //				}
 //			}
-			File arq = new File("C:/TXT/matriz.txt");
-			int l=0;
-			try (PrintWriter pw = new PrintWriter(arq)) {
-				for (int i = 0; i < a.get(0); i++) {
-					for (int j=l;j <a.get(0) ; j++) {
-						pw.print(matriz[i][j]+" ");
-
-					}
-					pw.println();
-					l++;
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
+//			File arq = new File("C:/TXT/matriz.txt");
+//			int l=0;
+//			try (PrintWriter pw = new PrintWriter(arq)) {
+//				for (int i = 0; i < a.get(0); i++) {
+//					for (int j=l;j <a.get(0) ; j++) {
+//						pw.print(matriz[i][j]+" ");
+//
+//					}
+//					pw.println();
+//					l++;
+//				}
+//			} catch (IOException ex) {
+//				ex.printStackTrace();
+//			}
 		}
 	return matriz;
 }
