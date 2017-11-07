@@ -45,12 +45,11 @@ public class Grafo {
 		for (int i = 0; i < lista.size(); i++) {
 			addVertice(lista.get(i).toString());
 		}
+		if (matriz == null) {
+			matriz = geraMatriz(arquivo);
+		}
 		for (int i = 0; i < lista.size(); i++) {
 			for (int j = 0; j < lista.size(); j++) {
-				if (matriz == null) {
-					matriz = new boolean[lista.get(0)][lista.get(0)];
-					matriz = geraMatriz(arquivo);
-				}
 				if (matriz[i][j]) {
 					vert.get(i).addAdjacent(vert.get(j));
 				}
@@ -349,21 +348,23 @@ public class Grafo {
 				matriz[a.get(i + 1) - 1][a.get(i) - 1] = true;
 				matriz[a.get(i) - 1][a.get(i + 1) - 1] = true;
 			}
-			for (int i = 1; i < a.get(0); i++) {
-				for (int j = 1; j < a.get(0); j++) {
-					if (!matriz[i][j]) {
-						matriz[i][j] = false;
-					}
-				}
-			}
+//			for (int i = 1; i < a.get(0); i++) {
+//				for (int j = 1; j < a.get(0); j++) {
+//					if (!matriz[i][j]) {
+//						matriz[i][j] = false;
+//					}
+//				}
+//			}
 			File arq = new File("C:/TXT/matriz.txt");
+			int l=0;
 			try (PrintWriter pw = new PrintWriter(arq)) {
 				for (int i = 0; i < a.get(0); i++) {
-					for (int j = 0; j < a.get(0); j++) {
+					for (int j=l;j <a.get(0) ; j++) {
 						pw.print(matriz[i][j]+" ");
 
 					}
 					pw.println();
+					l++;
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
