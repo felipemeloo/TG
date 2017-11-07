@@ -48,14 +48,19 @@ public class Grafo {
 		if (matriz == null) {
 			matriz = geraMatriz(arquivo);
 		}
+		int l = 0;
 		for (int i = 0; i < lista.size(); i++) {
-			for (int j = 0; j < lista.size(); j++) {
-				if (matriz[i][j]) {
-					vert.get(i).addAdjacent(vert.get(j));
+			for (int j = l; j < lista.size(); j++) {
+				if(matriz[i][j]){
+				vert.get(i).addAdjacent(vert.get(j));
+				vert.get(j).addAdjacent(vert.get(i));
 				}
 			}
+			l++;
 		}
 	}
+	
+
 
 	public void addEdge(String strOrig, String strDest) {
 		Vertice vAux1 = searchVerticeRef(strOrig);
@@ -345,16 +350,13 @@ public class Grafo {
 			matriz = new boolean[a.get(0)][a.get(0)];
 			// int j = 2;
 			for (int i = 1; i < a.size(); i += 2) {
+				if(a.get(i)>a.get(i+1)){
 				matriz[a.get(i + 1) - 1][a.get(i) - 1] = true;
+			}else 
 				matriz[a.get(i) - 1][a.get(i + 1) - 1] = true;
-			}
-//			for (int i = 1; i < a.get(0); i++) {
-//				for (int j = 1; j < a.get(0); j++) {
-//					if (!matriz[i][j]) {
-//						matriz[i][j] = false;
-//					}
-//				}
-//			}
+				}
+				
+
 //			File arq = new File("C:/TXT/matriz.txt");
 //			int l=0;
 //			try (PrintWriter pw = new PrintWriter(arq)) {
