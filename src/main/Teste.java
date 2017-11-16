@@ -9,6 +9,7 @@ public class Teste {
 	public static Grafo gp;
 	private static Vertice ve;
 	public static void main(String[] args) throws FileNotFoundException {
+		System.out.println("Inicio do processo: "+new java.util.Date().toString());
 		initOrdenacao();
 		initGraph();
 		System.out.println("Digite o nome do arquivo");
@@ -23,10 +24,14 @@ public class Teste {
 		// geraMatriz(numeros);]
 		Ordenacao ord = new Ordenacao();
 		//ve = new Vertice(Grafo.vert.get(0).getItem());
-	    gp.geraMatriz(Grafo.arquivo);
+//	    System.out.println("inicio matriz adjacencia"+new java.util.Date().toString());
+//	    gp.geraMatriz(Grafo.arquivo);
+//	    System.out.println("fim matriz adjacencia"+new java.util.Date().toString());
 		//gp.showInfo();
-		//gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
-		//gp.showInfo();
+	    System.out.println("inicio lista adjacencia"+new java.util.Date().toString());
+		gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
+	    System.out.println("fim lista adjacencia"+new java.util.Date().toString());
+		gp.showInfo();
 		//System.out.println(Grafo.vert.get(0).getDegree());
 		
 //		bl.percorrerAdjacente()
@@ -37,6 +42,7 @@ public class Teste {
 		 * possibilidades(g,numer,numeros); } g.atribuiTamanhoSequencia(); Vertice
 		 * inicial=g.getVerticeInicial(); g.printaSequencia(inicial);
 		 */
+
 	}
 
 	public static void initOrdenacao() {
