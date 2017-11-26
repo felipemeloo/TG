@@ -11,6 +11,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class Grafo {
+
 	public ArrayList<Vertice> vert;
 	public static ArrayList<Integer> arquivo = new ArrayList<Integer>();
 	public Grafo gp;
@@ -59,8 +60,6 @@ public class Grafo {
 			l++;
 		}
 	}
-	
-
 
 	public void addEdge(String strOrig, String strDest) {
 		Vertice vAux1 = searchVerticeRef(strOrig);
@@ -206,14 +205,14 @@ public class Grafo {
 	}
 	
 	public static FileReader lerArquivo(String nome){
-		String windows ="C:/TXT/";
-		String linux ="Home/TXT/";
+		//String windows ="C:/TXT/";
+		String linux ="/home/felipe/Documentos/";
 		FileReader ler = null;
 		try {
 			 ler = new FileReader(linux+nome);
 			} catch (FileNotFoundException e) {
 				try {
-					ler = new FileReader(windows+nome);
+					ler = new FileReader(linux+nome);
 				} catch (FileNotFoundException e1) {
 					System.err.println("Arquivo nao encontrado para os diretorios informados!!!");
 				}

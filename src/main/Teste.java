@@ -17,6 +17,9 @@ public class Teste {
 	    String nome = ler.nextLine(); // 3.5 entrada de dados (lendo uma String)
 //		as_graph
 		Grafo.criaArray(nome);
+		In in = new In(args[0]);
+		Graph G = new Graph(in);
+		System.out.println(G);
 		/*
 		 * saidaArquivo(); DirectGraphList g = new DirectGraphList();
 		 * System.out.println(getGrauVertice(5));
