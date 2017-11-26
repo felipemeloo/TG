@@ -1,4 +1,4 @@
-package main;
+package Grafo;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class Vertice
 {	
     public String item;
     private boolean Visitado;
-    int maiorSequencia;
+    float maiorSequencia;
     public Vertice proximo;
     public ArrayList<Vertice> lst = new ArrayList<Vertice>();
     public ArrayList<Aresta> listaAresta = new ArrayList<Aresta>();

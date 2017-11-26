@@ -1,4 +1,4 @@
-package main;
+package Grafo;
 
 class Node implements Comparable<Node>{
 	  int altura;

@@ -1,6 +1,8 @@
-import main.Graph;
+package main;
 
 import java.util.*;
+
+import Grafo.Graph;
 
 public class Buscas{
 

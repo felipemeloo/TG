@@ -3,10 +3,14 @@ package main;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import Grafo.CriaGrafo;
+import Grafo.Graph;
+import Grafo.Vertice;
+
 
 public class Teste {
 	private static Ordenacao hp;
-	public static Grafo gp;
+	public static CriaGrafo gp;
 	private static Vertice ve;
 	public static void main(String[] args) throws FileNotFoundException {
 		System.out.println("Inicio do processo: "+new java.util.Date().toString());
@@ -16,7 +20,7 @@ public class Teste {
 		Scanner ler = new Scanner(System.in);
 	    String nome = ler.nextLine(); // 3.5 entrada de dados (lendo uma String)
 //		as_graph
-		Grafo.criaArray(nome);
+		CriaGrafo.criaArray(nome);
 		In in = new In(args[0]);
 		Graph G = new Graph(in);
 		System.out.println(G);
@@ -32,7 +36,7 @@ public class Teste {
 //	    System.out.println("fim matriz adjacencia"+new java.util.Date().toString());
 		//gp.showInfo();
 	    System.out.println("inicio lista adjacencia"+new java.util.Date().toString());
-		gp.criaListaVertice(ord.listaDeVertices(Grafo.arquivo));
+		gp.criaListaVertice(ord.listaDeVertices(CriaGrafo.arquivo));
 	    System.out.println("fim lista adjacencia"+new java.util.Date().toString());
 		gp.showInfo();
 		//System.out.println(Grafo.vert.get(0).getDegree());
@@ -57,7 +61,7 @@ public class Teste {
 
 	public static void initGraph() {
 		if (gp == null) {
-			gp = new Grafo();
+			gp = new CriaGrafo();
 
 		}
 	}

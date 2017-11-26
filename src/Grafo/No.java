@@ -1,4 +1,4 @@
-package main;
+package Grafo;
 
 public class No {
 

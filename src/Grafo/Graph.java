@@ -1,6 +1,9 @@
-package main;
+package Grafo;
 
 import java.util.Stack;
+
+import main.Bag;
+import main.In;
 
 public class Graph {
     private final int V;

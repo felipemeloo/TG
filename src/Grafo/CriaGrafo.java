@@ -1,4 +1,4 @@
-package main;
+package Grafo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Grafo {
-
+public class CriaGrafo {
 	public ArrayList<Vertice> vert;
-	public static ArrayList<Integer> arquivo = new ArrayList<Integer>();
-	public Grafo gp;
+	public static ArrayList<Float> arquivo = new ArrayList<Float>();
+	public CriaGrafo gp;
 	public static boolean[][] matriz;
+	public static boolean comPeso = false;
 
-	public Grafo() {
+	public CriaGrafo() {
 		vert = new ArrayList<Vertice>();
 	}
 
@@ -41,23 +41,21 @@ public class Grafo {
 		}
 	}
 
-	public void criaListaVertice(ArrayList<Integer> lista) {
+	public void criaListaVertice(ArrayList<Float> lista) {
 
 		for (int i = 0; i < lista.size(); i++) {
 			addVertice(lista.get(i).toString());
 		}
-		if (matriz == null) {
-			matriz = geraMatriz(arquivo);
-		}
-		int l = 0;
 		for (int i = 0; i < lista.size(); i++) {
-			for (int j = l; j < lista.size(); j++) {
-				if(matriz[i][j]){
-				vert.get(i).addAdjacent(vert.get(j));
-				vert.get(j).addAdjacent(vert.get(i));
+			for (int j = 0; j < lista.size(); j++) {
+				if (matriz == null) {
+					matriz = new boolean[lista.get(0).intValue()][lista.get(0).intValue()];
+					matriz = geraMatriz(arquivo);
+				}
+				if (matriz[i][j]) {
+					vert.get(i).addAdjacent(vert.get(j));
 				}
 			}
-			l++;
 		}
 	}
 
@@ -172,13 +170,13 @@ public class Grafo {
 		FileReader ler = lerArquivo(nome);
 		try {
 			BufferedReader arq = new BufferedReader(ler);
-			int parsedStr = 0;
+			Float parsedStr = 0f;
 			String str = arq.readLine();
 			tamanhoIn = str.length();
 			while (str != null) {
 				while (tamanhoAt != tamanhoIn) {
 					if (str.substring(tamanhoAt, cont).equalsIgnoreCase(" ")) {
-						parsedStr = Integer.parseInt(parcial);
+						parsedStr = Float.valueOf(parcial);
 						arquivo.add(parsedStr);
 						parcial = "";
 					} else {
@@ -187,7 +185,7 @@ public class Grafo {
 					tamanhoAt++;
 					cont = tamanhoAt + 1;
 				}
-				parsedStr = Integer.parseInt(parcial);
+				parsedStr = Float.valueOf(parcial);
 				arquivo.add(parsedStr);
 				parcial = "";
 				cont = 1;
@@ -205,14 +203,14 @@ public class Grafo {
 	}
 	
 	public static FileReader lerArquivo(String nome){
-		//String windows ="C:/TXT/";
-		String linux ="/home/felipe/Documentos/";
+		String windows ="C:/TXT/";
+		String linux ="Home/TXT/";
 		FileReader ler = null;
 		try {
 			 ler = new FileReader(linux+nome);
 			} catch (FileNotFoundException e) {
 				try {
-					ler = new FileReader(linux+nome);
+					ler = new FileReader(windows+nome);
 				} catch (FileNotFoundException e1) {
 					System.err.println("Arquivo nao encontrado para os diretorios informados!!!");
 				}
@@ -241,11 +239,11 @@ public class Grafo {
 
 	public static int getGrauVertice(Integer vertice) {
 		int grau = 0;
-		for (Integer s : arquivo) {
-			if (s == vertice)
+		for (Float s : arquivo) {
+			if (s == Float.valueOf(vertice))
 				grau++;
 		}
-		if (vertice == arquivo.get(0)) {
+		if (vertice == arquivo.get(0).intValue()) {
 			grau--;
 		}
 		return grau;
@@ -272,7 +270,7 @@ public class Grafo {
 			return false;
 	}
 
-	public static boolean possibilidades(Grafo graph, String a, ArrayList<Integer> array) {
+	public static boolean possibilidades(CriaGrafo graph, String a, ArrayList<Integer> array) {
 		int diferentes = 0;
 		for (int i = 0; i < array.size(); i++) {
 			String numero = Integer.toString(array.get(i), 6);
@@ -295,7 +293,7 @@ public class Grafo {
 
 	public void atribuiTamanhoSequencia() {
 		for (int i = vert.size() - 1; i >= 0; i--) {
-			vert.get(i).maiorSequencia = 1;
+			vert.get(i).maiorSequencia = 1f;
 			for (int k = vert.get(i).lst.size() - 1; k >= 0; k--) {
 				if (vert.get(i).lst.get(k).maiorSequencia + 1 > vert.get(i).maiorSequencia) {
 					vert.get(i).maiorSequencia = vert.get(i).lst.get(k).maiorSequencia + 1;
@@ -308,7 +306,7 @@ public class Grafo {
 
 	public Vertice getVerticeInicial() {
 		Vertice aux = null;
-		int tamanho = 0;
+		Float tamanho = 0f;
 		for (int i = 0; i < vert.size(); i++) {
 			if (vert.get(i).maiorSequencia > tamanho) {
 				aux = vert.get(i);
@@ -324,7 +322,7 @@ public class Grafo {
 		return ler.nextInt();
 	}
 	
-	public void percorrendoAdjacente(Grafo grafo, Queue<Vertice> filaFilhos) {
+	public void percorrendoAdjacente(CriaGrafo grafo, Queue<Vertice> filaFilhos) {
 		boolean[] verticeVisitado = new boolean[grafo.vert.size()];
 		boolean nivelArvore;
 		int nivelRaiz = 1;
@@ -344,32 +342,33 @@ public class Grafo {
 		
 	}
 
-	public static boolean[][] geraMatriz(ArrayList<Integer> a) {
+	public static boolean[][] geraMatriz(ArrayList<Float> a) {
 		if (matriz == null) {
-			matriz = new boolean[a.get(0)][a.get(0)];
+			matriz = new boolean[a.get(0).intValue()][a.get(0).intValue()];
 			// int j = 2;
 			for (int i = 1; i < a.size(); i += 2) {
-				if(a.get(i)>a.get(i+1)){
-				matriz[a.get(i + 1) - 1][a.get(i) - 1] = true;
-			}else 
-				matriz[a.get(i) - 1][a.get(i + 1) - 1] = true;
+				matriz[a.get(i + 1).intValue() - 1][a.get(i).intValue() - 1] = true;
+				matriz[a.get(i).intValue() - 1][a.get(i + 1).intValue() - 1] = true;
+			}
+			for (int i = 1; i < a.get(0); i++) {
+				for (int j = 1; j < a.get(0); j++) {
+					if (!matriz[i][j]) {
+						matriz[i][j] = false;
+					}
 				}
-				
+			}
+			File arq = new File("C:/TXT/matriz.txt");
+			try (PrintWriter pw = new PrintWriter(arq)) {
+				for (int i = 0; i < a.get(0); i++) {
+					for (int j = 0; j < a.get(0); j++) {
+						pw.print(matriz[i][j]+" ");
 
-//			File arq = new File("C:/TXT/matriz.txt");
-//			int l=0;
-//			try (PrintWriter pw = new PrintWriter(arq)) {
-//				for (int i = 0; i < a.get(0); i++) {
-//					for (int j=l;j <a.get(0) ; j++) {
-//						pw.print(matriz[i][j]+" ");
-//
-//					}
-//					pw.println();
-//					l++;
-//				}
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			}
+					}
+					pw.println();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	return matriz;
 }
