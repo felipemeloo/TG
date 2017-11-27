@@ -1,25 +1,27 @@
 package Grafo;
 
-class Node implements Comparable<Node>{
-	  int altura;
-	  
-	  public Integer heuristica = null;
+import java.util.ArrayList;
+import java.util.List;
 
-	  /*
-	  // tabu -> Tabuleiro a associar ao nó
-	  // altura -> altura do nó
-	  // heur -> tipo de heuristica: 0 altura + manhattan distance e 1 manhattan distance outros nao sao calculados
-	  // target -> tabuleiro ao qual queremos chegar
-	  */
-	  public Node(int altura){
-	    this.altura = altura;
-	  }
+public class Node {
+	public int dado;
+	public boolean visitados;
+	List<Node> vizinhos;
 
-	  @Override
-	  public int compareTo(Node p) {
-	    if(this.heuristica < p.heuristica)
-	      return -1;
-	    else
-	      return 1;
-	  }
+	Node(int dado)
+	{
+		this.dado=dado;
+		this.vizinhos=new ArrayList<>();
+
 	}
+	public void addVizinho(Node vizinhoNo)
+	{
+		this.vizinhos.add(vizinhoNo);
+	}
+	public List<Node> getVizinho() {
+		return vizinhos;
+	}
+	public void setVizinho(List<Node> vizinhos) {
+		this.vizinhos = vizinhos;
+	}
+}

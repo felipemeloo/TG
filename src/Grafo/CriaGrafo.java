@@ -167,6 +167,7 @@ public class CriaGrafo {
 		int tamanhoAt = 0;
 		String parcial = "";
 		int cont = 1;
+		int cont2=0;
 		FileReader ler = lerArquivo(nome);
 		try {
 			BufferedReader arq = new BufferedReader(ler);
@@ -176,6 +177,7 @@ public class CriaGrafo {
 			while (str != null) {
 				while (tamanhoAt != tamanhoIn) {
 					if (str.substring(tamanhoAt, cont).equalsIgnoreCase(" ")) {
+						cont2++;
 						parsedStr = Float.valueOf(parcial);
 						arquivo.add(parsedStr);
 						parcial = "";
@@ -184,7 +186,7 @@ public class CriaGrafo {
 					}
 					tamanhoAt++;
 					cont = tamanhoAt + 1;
-				}
+				}comPeso=true;
 				parsedStr = Float.valueOf(parcial);
 				arquivo.add(parsedStr);
 				parcial = "";
