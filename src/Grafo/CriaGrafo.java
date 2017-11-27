@@ -31,7 +31,11 @@ public class CriaGrafo {
 	public CriaGrafo(String caminhoArquivoLeitura) {
 		vert = new ArrayList<Vertice>();
 		this.numeroVertices = getNumVertices();
-		lerArquivo(caminhoArquivoLeitura);
+		try {
+			criaArray(caminhoArquivoLeitura);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 /*	abstract protected void insereArestas(int v1, int v2);
