@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import Grafo.CriaGrafo;
-import Grafo.Graph;
 import Grafo.Vertice;
 
 
@@ -21,9 +20,6 @@ public class Teste {
 	    String nome = ler.nextLine(); // 3.5 entrada de dados (lendo uma String)
 //		as_graph
 		CriaGrafo.criaArray(nome);
-		In in = new In(args[0]);
-		Graph G = new Graph(in);
-		System.out.println(G);
 		/*
 		 * saidaArquivo(); DirectGraphList g = new DirectGraphList();
 		 * System.out.println(getGrauVertice(5));
@@ -61,7 +57,7 @@ public class Teste {
 
 	public static void initGraph() {
 		if (gp == null) {
-			gp = new CriaGrafo();
+			gp = new CriaGrafo("");
 
 		}
 	}

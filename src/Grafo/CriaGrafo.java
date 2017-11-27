@@ -7,8 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Set;
 
 import GrafoPeso.Grafo;
 import main.Ordenacao;
@@ -22,9 +25,27 @@ public class CriaGrafo {
 	public static float[][] matrizPeso;
 	public static boolean comPeso = false;
 	private static String prefixo;
+	public Integer numeroVertices;
+	public Integer numeroArestas;
 
-	public CriaGrafo() {
+	public CriaGrafo(String caminhoArquivoLeitura) {
 		vert = new ArrayList<Vertice>();
+		this.numeroVertices = getNumVertices();
+		lerArquivo(caminhoArquivoLeitura);
+	}
+	
+/*	abstract protected void insereArestas(int v1, int v2);
+	abstract public List<No> buscaProfundidade(int verticeInicial);
+	abstract public Map<Integer, Set<No>> buscaLargura(int verticeInicial);
+	abstract public List<List<No>> componentesConexos();*/
+
+
+	public Integer getNumeroArestas() {
+		return numeroArestas;
+	}
+
+	public void setNumeroArestas(Integer numeroArestas) {
+		this.numeroArestas = numeroArestas;
 	}
 
 	private Vertice searchVerticeRef(String item) {
@@ -339,26 +360,6 @@ public class CriaGrafo {
 		Scanner ler = new Scanner(System.in);
 		System.out.println("Digite a vértice a ser iniciada a busca:");
 		return ler.nextInt();
-	}
-	
-	public void percorrendoAdjacente(CriaGrafo grafo, Queue<Vertice> filaFilhos) {
-		boolean[] verticeVisitado = new boolean[grafo.vert.size()];
-		boolean nivelArvore;
-		int nivelRaiz = 1;
-		int[] nivelVertice = new int[grafo.vert.size()];
-		while(!filaFilhos.isEmpty()) {
-			nivelArvore = true;
-			Vertice v = filaFilhos.poll();
-			if(nivelRaiz == 1) {
-				verticeVisitado[grafo.vert.indexOf(v)]=true;
-			}
-			for(Vertice vt: v.getAdjacents()) {
-				
-				
-			}
-		}
-		
-		
 	}
 
 	public static boolean[][] geraMatriz(ArrayList<Float> a) {
