@@ -1,20 +1,21 @@
 package GrafoPeso;
 public class Grafo {
   public static class Aresta {
-    private int v1, v2, peso;
-    public Aresta (int v1, int v2, int peso) {
+    private int v1, v2;
+	float peso;
+    public Aresta (int v1, int v2, float peso) {
       this.v1 = v1; this.v2 = v2; this.peso = peso;
     }
-    public int peso () { return this.peso; }
+    public float peso () { return this.peso; }
     public int v1 () { return this.v1; }
     public int v2 () { return this.v2; }
   }
-  private int mat[][]; // @{\it pesos do tipo inteiro}@
+  private float mat[][]; // @{\it pesos do tipo inteiro}@
   private int numVertices;
   private int pos[]; // @{\it posicao atual ao se percorrer os adjs de um vertice v}@
 
   public Grafo (int numVertices) {
-    this.mat = new int[numVertices][numVertices];
+    this.mat = new float[numVertices][numVertices];
     this.pos = new int[numVertices]; 
     this.numVertices = numVertices; 
     for (int i = 0; i < this.numVertices; i++) {
@@ -22,15 +23,15 @@ public class Grafo {
       this.pos[i] = -1; 
     }
   }
-  public void insereAresta (int v1, int v2, int peso) {
-    this.mat[v1][v2] = peso; 
+  public void insereAresta (float v1, float v2, float f) {
+    this.mat[(int) v1][(int )v2] = f; 
   }
-  public boolean existeAresta (int v1, int v2) {
-    return (this.mat[v1][v2] > 0);
+  public boolean existeAresta (float v1, float v2) {
+    return (this.mat[(int)v1][(int)v2] > 0);
   }
-  public boolean listaAdjVazia (int v) {
+  public boolean listaAdjVazia (float v) {
     for (int i =0; i < this.numVertices; i++)
-      if (this.mat[v][i] > 0) return false;
+      if (this.mat[(int)v][i] > 0) return false;
     return true;
   }
   public Aresta primeiroListaAdj (int v) {

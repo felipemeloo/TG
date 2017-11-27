@@ -10,12 +10,18 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Scanner;
 
+import GrafoPeso.Grafo;
+import main.Ordenacao;
+
 public class CriaGrafo {
 	public ArrayList<Vertice> vert;
 	public static ArrayList<Float> arquivo = new ArrayList<Float>();
 	public CriaGrafo gp;
+	private Grafo gr;
 	public static boolean[][] matriz;
+	public static float[][] matrizPeso;
 	public static boolean comPeso = false;
+	private static String prefixo;
 
 	public CriaGrafo() {
 		vert = new ArrayList<Vertice>();
@@ -42,14 +48,16 @@ public class CriaGrafo {
 	}
 
 	public void criaListaVertice(ArrayList<Float> lista) {
-
-		for (int i = 0; i < lista.size(); i++) {
-			addVertice(lista.get(i).toString());
+		if(!comPeso) {
+			Ordenacao ord = new Ordenacao();
+			ArrayList<Float> listaOrd = ord.listaDeVertices(CriaGrafo.arquivo);
+		for (int i = 0; i < listaOrd.size(); i++) {
+			addVertice(listaOrd.get(i).toString());
 		}
 		for (int i = 0; i < lista.size(); i++) {
 			for (int j = 0; j < lista.size(); j++) {
 				if (matriz == null) {
-					matriz = new boolean[lista.get(0).intValue()][lista.get(0).intValue()];
+					matriz = new boolean[listaOrd.get(0).intValue()][listaOrd.get(0).intValue()];
 					matriz = geraMatriz(arquivo);
 				}
 				if (matriz[i][j]) {
@@ -57,6 +65,13 @@ public class CriaGrafo {
 				}
 			}
 		}
+		} else {
+		} gr = new Grafo(lista.get(0).intValue());
+			for (int i = 1; i < lista.size(); i++) {
+				gr.insereAresta(lista.get(i),lista.get(i++),lista.get(1+2));
+				i=i+3;
+				if (i>lista.size())break;
+			}
 	}
 
 	public void addEdge(String strOrig, String strDest) {
@@ -207,10 +222,12 @@ public class CriaGrafo {
 	public static FileReader lerArquivo(String nome){
 		String windows ="C:/TXT/";
 		String linux ="Home/TXT/";
+		prefixo = linux;
 		FileReader ler = null;
 		try {
 			 ler = new FileReader(linux+nome);
 			} catch (FileNotFoundException e) {
+				prefixo = windows;
 				try {
 					ler = new FileReader(windows+nome);
 				} catch (FileNotFoundException e1) {
@@ -224,7 +241,7 @@ public class CriaGrafo {
 	}
 
 	public static void saidaArquivo() {
-		File arq = new File("/home/felipe/Documentos/output.txt");
+		File arq = new File(prefixo+"output.txt");
 		try (PrintWriter pw = new PrintWriter(arq)) {
 			pw.println("# n =" + arquivo.get(0));
 			pw.println("# m =" + ((arquivo.size() - 1) / 2));
@@ -359,7 +376,7 @@ public class CriaGrafo {
 					}
 				}
 			}
-			File arq = new File("C:/TXT/matriz.txt");
+			File arq = new File(prefixo+"matriz.txt");
 			try (PrintWriter pw = new PrintWriter(arq)) {
 				for (int i = 0; i < a.get(0); i++) {
 					for (int j = 0; j < a.get(0); j++) {
@@ -374,7 +391,29 @@ public class CriaGrafo {
 		}
 	return matriz;
 }
+	
+	public static float[][] geraMatrizPeso(ArrayList<Float> a) {
+		if (matrizPeso == null) {
+			matrizPeso = new float[a.get(0).intValue()][a.get(0).intValue()];
+			// int j = 2;
+			for (int i = 1; i < a.size(); i += 2) {
+				matrizPeso[a.get(i + 1).intValue() - 1][a.get(i).intValue() - 1] = a.get(i+2);
+				matrizPeso[a.get(i).intValue() - 1][a.get(i + 1).intValue() - 1] = a.get(i+2);
+			}
+			File arq = new File(prefixo+"matrizPeso.txt");
+			try (PrintWriter pw = new PrintWriter(arq)) {
+				for (int i = 0; i < a.get(0); i++) {
+					for (int j = 0; j < a.get(0); j++) {
+						pw.print(matrizPeso[i][j]+" ");
 
-	BufferedReader arq;
+					}
+					pw.println();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	return matrizPeso;
+}
 
 }
